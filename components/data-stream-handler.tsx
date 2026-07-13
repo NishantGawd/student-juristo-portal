@@ -6,7 +6,9 @@ import { unstable_serialize } from "swr/infinite";
 import { initialArtifactData, useArtifact } from "@/hooks/use-artifact";
 import { artifactDefinitions } from "./artifact";
 import { useDataStreamState, useDataStreamSetter } from "./data-stream-provider";
-import { getChatHistoryPaginationKey } from "./sidebar-history";
+export function getChatHistoryPaginationKey(...args: any[]): string {
+  return "sidebar-chat-history-pagination-default-key";
+}
 
 export function DataStreamHandler() {
   const dataStream = useDataStreamState();

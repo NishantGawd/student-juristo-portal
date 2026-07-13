@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 import { downgradeExpiredPaidPlans } from "@/lib/billing/plan-cycle";
-import { runPlatformHealthLookup } from "@/lib/monitoring/platform-health";
 
 import { db } from "@/lib/db/queries";
 import {
@@ -39,13 +38,6 @@ export async function GET(req: Request) {
     results.billing = "Failed";
   }
 
-  // ---------------- Platform Health ----------------
-  try {
-    results.platformHealth = await runPlatformHealthLookup();
-  } catch (e) {
-    console.error("Platform Health:", e);
-    results.platformHealth = "Failed";
-  }
   
   // ---------------- Notifications ----------------
   try {
