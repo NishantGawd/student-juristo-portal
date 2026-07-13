@@ -1,0 +1,1 @@
+ALTER TABLE "UserActivityEvent" ADD COLUMN "platform" varchar(50) DEFAULT 'juristo';

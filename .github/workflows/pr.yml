@@ -1,0 +1,54 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ "main", "master", "finalprod" ]
+  push:
+    branches: [ "main", "master", "finalprod" ]
+
+jobs:
+  validate:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Format Check
+        run: npm run format
+        continue-on-error: true
+
+      - name: Linter Check
+        run: npm install --no-save @biomejs/cli-linux-x64 && npm run lint
+
+      - name: Type Checking
+        run: npx tsc --noEmit
+
+      - name: Unit Tests (Jest)
+        run: npm run test:unit
+
+      # Uncomment the below job if you want to run builds on PR
+      # NOTE: Next.js builds and DB migrations often require environment variables 
+      # (e.g. DATABASE_URL, NEXT_PUBLIC_...).
+      # - name: Build Application
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      #     # Add other necessary secrets here
+      #   run: npm run build
+      
+      # Uncomment the below job to run playwright tests
+      # - name: Install Playwright Browsers
+      #   run: npx playwright install --with-deps
+      # - name: Run E2E Tests
+      #   run: npm run test
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}

@@ -1,0 +1,1 @@
+ALTER TABLE "UserActivityEvent" ADD COLUMN "country" varchar(2);

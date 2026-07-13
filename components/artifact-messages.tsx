@@ -1,0 +1,126 @@
+import type { UseChatHelpers } from "@ai-sdk/react";
+import equal from "fast-deep-equal";
+import { AnimatePresence, motion } from "framer-motion";
+import { memo } from "react";
+import { useMessages } from "@/hooks/use-messages";
+import type { Vote } from "@/lib/db/schema";
+import type { ChatMessage } from "@/lib/types";
+import type { UIArtifact } from "./artifact";
+import { PreviewMessage, ThinkingMessage } from "./message";
+
+type ArtifactMessagesProps = {
+  addToolApprovalResponse: UseChatHelpers<any>["addToolApprovalResponse"];
+  chatId: string;
+  status: UseChatHelpers<any>["status"];
+  votes: Vote[] | undefined;
+  messages: ChatMessage[];
+  setMessages: UseChatHelpers<any>["setMessages"];
+  regenerate: UseChatHelpers<any>["regenerate"];
+  sendMessage?: (...args: any[]) => unknown;
+  isReadonly: boolean;
+  artifactStatus: UIArtifact["status"];
+  stoppedMessages?: Set<string>;
+  deleteTrailingMessages?: (payload: { id: string }) => Promise<void>;
+};
+
+function PureArtifactMessages({
+  addToolApprovalResponse,
+  chatId,
+  status,
+  votes,
+  messages,
+  setMessages,
+  regenerate,
+  sendMessage,
+  isReadonly,
+  stoppedMessages = new Set(),
+  deleteTrailingMessages,
+}: ArtifactMessagesProps) {
+  const {
+    containerRef: messagesContainerRef,
+    endRef: messagesEndRef,
+    onViewportEnter,
+    onViewportLeave,
+    hasSentMessage,
+  } = useMessages({
+    status,
+  });
+
+  return (
+    <div
+      className="flex h-full w-full flex-col gap-4 overflow-y-auto px-4 pt-4"
+      ref={messagesContainerRef}
+    >
+      {messages.map((message, index) => (
+        <PreviewMessage
+          addToolApprovalResponse={addToolApprovalResponse}
+          chatId={chatId}
+          deleteTrailingMessages={deleteTrailingMessages}
+          isLoading={status === "streaming" && index === messages.length - 1}
+          isReadonly={isReadonly}
+          isStopped={stoppedMessages.has(message.id)}
+          key={`${message.id}-${index}`}
+          message={message}
+          regenerate={regenerate}
+          requiresScrollPadding={
+            hasSentMessage && index === messages.length - 1
+          }
+          sendMessage={sendMessage as any}
+          setMessages={setMessages}
+          status={status}
+          vote={
+            votes
+              ? votes.find((vote) => vote.messageId === message.id)
+              : undefined
+          }
+        />
+      ))}
+
+      <AnimatePresence mode="wait">
+        {status === "submitted" &&
+          !messages.some((msg) =>
+            msg.parts?.some(
+              (part) => "state" in part && part.state === "approval-responded"
+            )
+          ) && <ThinkingMessage key="thinking" />}
+      </AnimatePresence>
+
+      <motion.div
+        className="min-h-[24px] min-w-[24px] shrink-0"
+        onViewportEnter={onViewportEnter}
+        onViewportLeave={onViewportLeave}
+        ref={messagesEndRef}
+      />
+    </div>
+  );
+}
+
+function areEqual(
+  prevProps: ArtifactMessagesProps,
+  nextProps: ArtifactMessagesProps
+) {
+  if (
+    prevProps.artifactStatus === "streaming" &&
+    nextProps.artifactStatus === "streaming"
+  ) {
+    return true;
+  }
+
+  if (prevProps.status !== nextProps.status) {
+    return false;
+  }
+  if (prevProps.status && nextProps.status) {
+    return false;
+  }
+  if (prevProps.messages.length !== nextProps.messages.length) {
+    return false;
+  }
+  if (!equal(prevProps.votes, nextProps.votes)) {
+    return false;
+  }
+
+  return true;
+}
+
+export const ArtifactMessages = memo(PureArtifactMessages, areEqual);
+

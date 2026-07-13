@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "mem0": {
+      "source": "mem0ai/mem0",
+      "sourceType": "github",
+      "computedHash": "2e93f1e443a9d3df9be733ad39b4b4cef73e993dcb4d9cd0b00e59550630e460"
+    },
+    "tool-ui": {
+      "source": "assistant-ui/tool-ui",
+      "sourceType": "github",
+      "computedHash": "39516e5417921ecba72cbf2a7c034361a245202a8d355e17a227d9e02bda2d0d"
+    }
+  }
+}

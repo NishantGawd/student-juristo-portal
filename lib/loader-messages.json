@@ -1,0 +1,84 @@
+{
+  "odr": [
+    "Understanding your dispute...",
+    "Classifying dispute type...",
+    "Checking ODR route and plan access...",
+    "Mapping to official portal...",
+    "Reviewing missing filing details...",
+    "Preparing ODR next steps...",
+    "Structuring your filing packet..."
+  ],
+  "research": [
+    "Reading the legal issue...",
+    "Identifying relevant statutes...",
+    "Checking precedent signals...",
+    "Mapping jurisdiction and forum context...",
+    "Separating law from practical next steps...",
+    "Preparing a clear legal answer..."
+  ],
+  "lawyer": [
+    "Understanding the legal help needed...",
+    "Mapping issue to practice area...",
+    "Checking location and urgency signals...",
+    "Looking for relevant lawyer matches...",
+    "Preparing safe next steps..."
+  ],
+  "pricing": [
+    "Checking your plan context...",
+    "Reviewing feature access...",
+    "Comparing usage limits...",
+    "Preparing upgrade guidance...",
+    "Keeping available free options visible..."
+  ],
+  "document": [
+    "Reading your document...",
+    "Extracting key legal details...",
+    "Checking clauses and obligations...",
+    "Mapping risks and missing terms...",
+    "Preparing document-specific guidance..."
+  ],
+  "drafting": [
+    "Initializing AI legal drafting engine...",
+    "Capturing party and agreement details...",
+    "Analyzing contract intent and legal scope...",
+    "Identifying applicable laws and regulations...",
+    "Structuring agreement framework and hierarchy...",
+    "Preparing definitions, recitals, and interpretation clauses...",
+    "Drafting obligations, rights, and responsibilities...",
+    "Generating payment, term, and termination conditions...",
+    "Reviewing confidentiality and data protection provisions...",
+    "Structuring indemnity, liability, and risk allocation clauses...",
+    "Evaluating dispute resolution and governing law requirements...",
+    "Cross-referencing standard legal boilerplate provisions...",
+    "Validating clause consistency and enforceability...",
+    "Checking jurisdiction-specific legal compliance...",
+    "Optimizing readability and contractual precision...",
+    "Ensuring statutory and regulatory alignment...",
+    "Reviewing formatting and legal document structure...",
+    "Scanning for ambiguous or conflicting language...",
+    "Finalizing legal safeguards and protections...",
+    "Preparing your professional legal draft..."
+  ],
+  "general": [
+    "Initializing AI legal research engine...",
+    "Processing legal facts and contextual background...",
+    "Identifying relevant statutes and legal principles...",
+    "Analyzing judicial precedents and case law...",
+    "Reviewing constitutional and statutory provisions...",
+    "Extracting relevant legal interpretations...",
+    "Evaluating procedural and jurisdictional considerations...",
+    "Comparing precedent applicability across jurisdictions...",
+    "Assessing strengths and weaknesses of legal positions...",
+    "Synthesizing jurisprudential reasoning...",
+    "Reviewing compliance obligations and legal exposure...",
+    "Cross-referencing authoritative legal sources...",
+    "Identifying conflicting interpretations and exceptions...",
+    "Analyzing contractual and regulatory implications...",
+    "Evaluating enforceability and legal validity...",
+    "Structuring comprehensive legal analysis...",
+    "Drafting precise and well-supported legal reasoning...",
+    "Refining clarity, citations, and legal coherence...",
+    "Performing final legal consistency review...",
+    "Preparing your comprehensive legal response..."
+  ]
+}
