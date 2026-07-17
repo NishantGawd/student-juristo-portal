@@ -1,9 +1,10 @@
 import { NextResponse, NextRequest } from "next/server";
 import { auth } from "@/app/(auth)/auth";
-import { getContractPurchase, db } from "@/lib/db/queries";
+import { getContractPurchase } from "@/lib/db/queries";
 import { lawyerContract } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import { db } from "@/lib/db";
 
 const REGION = process.env.AWS_REGION || "eu-north-1";
 const BUCKET = process.env.S3_BUCKET_NAME || "juristo-prod-bucket";

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/queries';
+import { db } from '@/lib/db';
 import { user } from '@/lib/db/schema';
 import { validatePasswordStrength } from '@/lib/auth/password-validation';
 import { eq, and, gt } from 'drizzle-orm';
