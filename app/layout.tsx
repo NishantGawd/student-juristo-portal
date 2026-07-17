@@ -189,9 +189,8 @@ export default function RootLayout({
         />
         <link rel="dns-prefetch" href="https://storage.googleapis.com" />
 
-        {/* Prefetch critical routes on home page for better navigation */}
-        <link rel="prefetch" href="/dashboard" as="document" />
-        <link rel="prefetch" href="/contracts" as="document" />
+        {/* Cleaned Preload Links inside app/layout.tsx Head Container */}
+        <link rel="prefetch" href="/clat-exam?tab=dashboard" as="document" />
 
         <Script
           id="juristo-seo-schema"

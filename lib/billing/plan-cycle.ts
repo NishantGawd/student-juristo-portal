@@ -2,7 +2,7 @@ import "server-only";
 
 import { and, eq, inArray, lte, ne } from "drizzle-orm";
 import { getRazorpaySubscription, type PlanType } from "@/lib/razorpay";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { user } from "@/lib/db/schema";
 
 type SubscriptionStatus = "active" | "cancelled" | "past_due" | "created";

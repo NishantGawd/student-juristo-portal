@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { type NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/(auth)/auth";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { user } from "@/lib/db/schema";
 import { NotificationService } from "@/lib/notifications/service";
 

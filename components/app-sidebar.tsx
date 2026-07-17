@@ -4,7 +4,6 @@ import {
   BarChart3,
   ChevronDown,
   ClipboardList,
-  GraduationCap,
   LayoutDashboard,
   MapIcon,
   PlayCircle,
@@ -14,10 +13,10 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import type { User } from "next-auth";
 import { useState } from "react";
-import { SidebarHistory } from "@/components/sidebar-history";
 import { SidebarUserNav } from "@/components/sidebar-user-nav";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,7 +55,7 @@ function SidebarSectionLabel({ children }: { children: React.ReactNode }) {
   if (isCollapsed) return null;
 
   return (
-    <div className="px-3 pt-4 pb-1.5 font-semibold text-[11px] uppercase tracking-wider text-sidebar-foreground/40 transition-opacity duration-200">
+    <div className="px-4 pt-5 pb-2 font-bold text-[10px] uppercase tracking-widest text-zinc-400 dark:text-zinc-500 transition-opacity duration-200">
       {children}
     </div>
   );
@@ -76,18 +75,18 @@ function SidebarRow({
   const Icon = item.icon;
 
   const className = cn(
-    "flex items-center transition-all duration-200 ease-in-out font-medium text-[14px]",
+    "flex items-center transition-colors duration-200 ease-in-out text-[13px] tracking-wide rounded-none",
     isCollapsed
-      ? "h-8 w-8 justify-center mx-auto rounded-lg"
-      : "h-9 w-full gap-3 rounded-lg px-3",
+      ? "h-9 w-9 justify-center mx-auto"
+      : "h-9 w-full gap-3 px-4",
     active
-      ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
-      : "text-sidebar-foreground/90 hover:bg-sidebar-accent/70 hover:text-sidebar-accent-foreground"
+      ? "bg-zinc-100 dark:bg-white/10 text-zinc-900 dark:text-white font-bold border-l-2 border-[#4169E1]"
+      : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white font-medium border-l-2 border-transparent"
   );
 
   const content = (
     <>
-      <Icon className={cn("shrink-0", isCollapsed ? "size-4" : "size-[17px]")} />
+      <Icon className={cn("shrink-0", isCollapsed ? "size-4" : "size-[16px]")} />
       {!isCollapsed && <span className="min-w-0 truncate">{item.label}</span>}
     </>
   );
@@ -102,7 +101,7 @@ function SidebarRow({
     return (
       <Tooltip delayDuration={0}>
         <TooltipTrigger asChild>{linkElement}</TooltipTrigger>
-        <TooltipContent side="right" className="font-medium text-[12px]">
+        <TooltipContent side="right" className="font-medium text-[11px] rounded-none border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] text-zinc-900 dark:text-white">
           {item.label}
         </TooltipContent>
       </Tooltip>
@@ -126,8 +125,6 @@ export function AppSidebar({
   const { setOpenMobile, state, isMobile } = useSidebar();
   const isCollapsed = state === "collapsed" && !isMobile;
 
-  const [isChatHistoryOpen, setIsChatHistoryOpen] = useState(true);
-
   const closeMobile = () => setOpenMobile(false);
   
   // Extracts the current query target parameter, defaulting safely to dashboard view
@@ -135,20 +132,28 @@ export function AppSidebar({
 
   return (
     <>
-      <Sidebar collapsible="icon" className="border-sidebar-border/70 group-data-[side=left]:border-r transition-all duration-300 ease-in-out">
-        <SidebarHeader className={cn("transition-all duration-300 ease-in-out", isCollapsed ? "px-1 py-3.5" : "px-2.5 py-3")}>
+      <Sidebar collapsible="icon" className="border-zinc-200 dark:border-white/5 bg-white dark:bg-[#0C1222] group-data-[side=left]:border-r transition-all duration-300 ease-in-out">
+        <SidebarHeader className={cn("transition-all duration-300 ease-in-out border-b border-zinc-100 dark:border-white/5", isCollapsed ? "px-1 py-4" : "px-4 py-4")}>
           <SidebarMenu className="gap-1">
-            <div className={cn("flex items-center justify-between", isCollapsed ? "px-0 justify-center mb-1" : "px-2 mb-1")}>
+            <div className={cn("flex items-center justify-between", isCollapsed ? "px-0 justify-center" : "")}>
               <Link
-                className={cn("flex min-w-0 items-center gap-2.5 rounded-md py-1.5", !isCollapsed && "pr-2")}
+                className="flex min-w-0 items-center gap-1.5 transition-opacity hover:opacity-90 align-middle"
                 href="/clat-exam?tab=dashboard"
                 onClick={closeMobile}
               >
-                <div className="flex h-6 w-6 items-center justify-center rounded bg-primary text-primary-foreground font-black text-xs shrink-0 shadow-sm">
-                  <GraduationCap className="size-3.5" />
+                {/* ─── Optimized Company Logo Layout Integration ─── */}
+                <div className="flex h-7 w-6 items-center justify-center shrink-0 overflow-visible">
+                  <Image 
+                    src="/favicon.png" 
+                    alt="Juristo AI Logo" 
+                    width={24} 
+                    height={28} 
+                    className="h-7 w-auto object-contain dark:brightness-[0.95]" 
+                    priority
+                  />
                 </div>
                 {!isCollapsed && (
-                  <span className="truncate font-bold text-[15px] tracking-tight text-foreground">
+                  <span className="truncate font-bold text-[17px] tracking-tight text-zinc-900 dark:text-white font-serif select-none pl-0.5">
                     Juristo AI
                   </span>
                 )}
@@ -158,7 +163,7 @@ export function AppSidebar({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 text-sidebar-foreground/60 hover:text-sidebar-foreground focus:bg-sidebar-accent md:hidden rounded-lg"
+                  className="h-8 w-8 text-zinc-500 hover:text-zinc-900 dark:hover:text-white rounded-none"
                   onClick={() => setOpenMobile(false)}
                   aria-label="Close sidebar"
                 >
@@ -169,7 +174,7 @@ export function AppSidebar({
           </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent className="overflow-y-auto overflow-x-hidden px-2 pb-3 !scrollbar-none transition-all duration-300 ease-in-out">
+        <SidebarContent className="overflow-y-auto overflow-x-hidden pb-3 !scrollbar-none transition-all duration-300 ease-in-out bg-white dark:bg-[#0C1222]">
           <SidebarMenu className={cn("gap-1", isCollapsed && "space-y-1.5")}>
             
             <SidebarSectionLabel>CLAT Prep Workspace</SidebarSectionLabel>
@@ -183,48 +188,10 @@ export function AppSidebar({
                 />
               ))}
             </div>
-
-            {!isCollapsed && (
-              <>
-                <button
-                  className="mt-4 flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-left transition-colors hover:bg-sidebar-accent/70"
-                  onClick={() => setIsChatHistoryOpen((open) => !open)}
-                  type="button"
-                >
-                  <span className="font-semibold text-[11px] uppercase tracking-wider text-sidebar-foreground/45">
-                    Recent Sessions
-                  </span>
-                  <ChevronDown
-                    className={cn(
-                      "size-3 text-sidebar-foreground/45 transition-transform duration-200 ml-auto",
-                      isChatHistoryOpen && "rotate-180"
-                    )}
-                  />
-                </button>
-
-                <div
-                  className={cn(
-                    "transition-all duration-300 ease-in-out",
-                    isChatHistoryOpen
-                      ? "h-auto opacity-100"
-                      : "h-0 overflow-hidden opacity-0"
-                  )}
-                >
-                  <div className="pb-4">
-                    <SidebarHistory
-                      globalUpdateChatVisibilityAction={
-                        globalUpdateChatVisibilityAction
-                      }
-                      user={user}
-                    />
-                  </div>
-                </div>
-              </>
-            )}
           </SidebarMenu>
         </SidebarContent>
 
-        <SidebarFooter className={cn("border-sidebar-border/70 border-t transition-all duration-300 ease-in-out", isCollapsed ? "px-0 py-2.5 flex justify-center" : "px-2 py-2")}>
+        <SidebarFooter className={cn("border-zinc-100 dark:border-white/5 border-t bg-white dark:bg-[#0C1222] transition-all duration-300 ease-in-out", isCollapsed ? "px-0 py-3 flex justify-center" : "px-3 py-3")}>
           {user ? <SidebarUserNav user={user} /> : null}
         </SidebarFooter>
       </Sidebar>

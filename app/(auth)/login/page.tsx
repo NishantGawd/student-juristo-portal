@@ -7,11 +7,8 @@ import {
   ArrowRight,
   Eye,
   EyeOff,
-  GraduationCap,
   KeyRound,
-  Mail,
-  Scale,
-  Sparkles
+  Mail
 } from "lucide-react";
 
 import { ForgotPasswordModal } from "@/components/forgot-password-modal";
@@ -74,131 +71,131 @@ export default function Page() {
   };
 
   return (
-    // Locked No-Scroll Viewport Box using #080D1A Background
-    <div className="h-screen w-screen max-h-screen bg-[#080D1A] text-white antialiased flex font-sans overflow-hidden">
+    // Locked viewport screen following the strict two-pane layout rule
+    <div className="h-screen w-screen max-h-screen bg-white text-zinc-900 antialiased flex font-sans overflow-hidden selection:bg-[#4169E1]/10 selection:text-[#4169E1]">
 
-      {/* ─── LEFT PANEL: THE AUTHENTICATION ENGINE (Theme-Aligned Variant) ─── */}
-      <div className="w-full lg:w-[42%] xl:w-[38%] flex flex-col justify-between p-6 xl:p-10 bg-white dark:bg-[#080D1A] text-[#17140f] dark:text-white border-r border-zinc-200 dark:border-white/5 h-full overflow-hidden z-10 transition-colors duration-300">
+      {/* ─── LEFT PANEL: THE AUTHENTICATION ENGINE (45% Width) ─── */}
+      <div className="w-full lg:w-[45%] xl:w-[40%] flex flex-col justify-center p-8 sm:p-12 xl:p-16 bg-white border-r border-zinc-200 h-full overflow-y-auto z-10">
 
-        {/* Brand Header */}
-        <div className="flex items-center gap-2.5 select-none shrink-0">
-          <div className="h-8.5 w-8.5 rounded-xl bg-[#4169E1] flex items-center justify-center text-white shadow-md">
-            <GraduationCap className="h-4.5 w-4.5" />
-          </div>
-          <span className="font-extrabold text-base tracking-tight text-[#17140f] dark:text-white">
-            Juristo AI
-            <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-md bg-[#4169E1]/10 dark:bg-[#4169E1]/20 text-[#4169E1] ml-2 tracking-wider uppercase align-middle border border-[#4169E1]/20 dark:border-[#4169E1]/30">
-              Prep OS
-            </span>
-          </span>
-        </div>
+        <div className="w-full max-w-[360px] mx-auto space-y-8 animate-in fade-in duration-300">
 
-        {/* Central Card Element */}
-        <div className="w-full max-w-[350px] mx-auto my-auto py-2 animate-in fade-in slide-in-from-top-3 duration-400 shrink-0">
-          <div className="space-y-1.5 mb-6 text-left">
-            <h1 className="text-2xl font-black tracking-tight text-[#17140f] dark:text-white sm:text-3xl">
-              Welcome Back
-            </h1>
-            <p className="text-zinc-500 dark:text-zinc-400 text-[13.5px] leading-relaxed font-normal">
-              Sign in to access your mock execution sheets, dynamic learning roadmaps, and your active AI Mentor.
-            </p>
+          {/* Brand Header Stack */}
+          <div className="space-y-4 select-none text-left">
+            <div className="flex items-center gap-3">
+              <div className="h-6 w-1 bg-[#4169E1]" />
+              <span className="font-bold text-sm tracking-widest uppercase text-zinc-400">
+                Juristo AI
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tight text-zinc-900 font-serif">
+                Welcome back.
+              </h1>
+              <p className="text-xs text-zinc-500 leading-relaxed font-normal">
+                Sign in to access your mock execution sheets, dynamic learning roadmaps, and active AI mentor arrays.
+              </p>
+            </div>
           </div>
 
-          <form action={handleSubmit} className="space-y-4">
+          {/* Credentials Form Hub */}
+          <form action={handleSubmit} className="space-y-5">
             <input name="callbackUrl" type="hidden" value={callbackUrl} />
 
-            {/* Email Input Field */}
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 block" htmlFor="email">
+            {/* Email Input Node */}
+            <div className="space-y-2 text-left">
+              <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block" htmlFor="email">
                 Aspirant Email Address
               </label>
-              <div className="relative rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-[#080D1A] transition-all focus-within:border-[#4169E1] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#4169E1]/10">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 dark:text-zinc-500" />
+              <div className="relative border border-zinc-200 bg-white transition-all focus-within:border-[#4169E1] focus-within:ring-1 focus-within:ring-[#4169E1]">
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-400" />
                 <input
                   id="email"
                   name="email"
                   type="email"
                   required
                   placeholder="name@university.com"
-                  className="w-full h-10.5 pl-10 pr-4 rounded-xl bg-transparent text-[14px] outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-[#17140f] dark:text-white"
+                  className="w-full h-11 pl-10 pr-4 bg-transparent text-xs font-medium outline-none text-zinc-900 placeholder:text-zinc-300 rounded-none"
                 />
               </div>
             </div>
 
-            {/* Password Input Field */}
-            <div className="space-y-1.5">
+            {/* Password Input Node */}
+            <div className="space-y-2 text-left">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500" htmlFor="password">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 block" htmlFor="password">
                   Security Token Password
                 </label>
                 <button
                   type="button"
-                  className="text-xs font-bold text-[#4169E1] hover:text-[#4169E1]/80 hover:underline cursor-pointer transition-all"
+                  className="text-[11px] font-semibold text-[#4169E1] hover:underline focus:outline-none"
                   onClick={() => setForgotPasswordOpen(true)}
                 >
                   Forgot token?
                 </button>
               </div>
-              <div className="relative rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-[#080D1A] transition-all focus-within:border-[#4169E1] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#4169E1]/10">
-                <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 dark:text-zinc-500" />
+              <div className="relative border border-zinc-200 bg-white transition-all focus-within:border-[#4169E1] focus-within:ring-1 focus-within:ring-[#4169E1]">
+                <KeyRound className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-400" />
                 <input
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
                   placeholder="••••••••••••"
-                  className="w-full h-10.5 pl-10 pr-12 rounded-xl bg-transparent text-[14px] outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-600 text-[#17140f] dark:text-white"
+                  className="w-full h-11 pl-10 pr-12 bg-transparent text-xs font-medium outline-none text-zinc-900 placeholder:text-zinc-300 rounded-none"
                 />
                 <button
-                  className="absolute inset-y-0 right-3.5 flex items-center px-0.5 cursor-pointer"
+                  className="absolute inset-y-0 right-3.5 flex items-center px-0.5 focus:outline-none"
                   onClick={() => setShowPassword(!showPassword)}
                   type="button"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-zinc-400 dark:text-zinc-500 transition-colors hover:text-[#17140f] dark:hover:text-white" />
+                    <EyeOff className="h-4 w-4 text-zinc-400 hover:text-zinc-600 transition-colors" />
                   ) : (
-                    <Eye className="h-4 w-4 text-zinc-400 dark:text-zinc-500 transition-colors hover:text-[#17140f] dark:hover:text-white" />
+                    <Eye className="h-4 w-4 text-zinc-400 hover:text-zinc-600 transition-colors" />
                   )}
                 </button>
               </div>
             </div>
 
-            {/* Royal Blue (#4169E1) Action Button */}
+            {/* Core Action Button (Royal Blue Accent) */}
             <button
               type="submit"
               disabled={isSuccessful || isPending || state.status === "in_progress"}
-              className="w-full h-11 rounded-xl bg-[#4169E1] hover:bg-[#4169E1]/90 text-white font-bold text-[14px] tracking-wide shadow-md transition-all flex items-center justify-center gap-2 relative overflow-hidden active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none cursor-pointer"
+              className="w-full h-11 bg-[#4169E1] hover:bg-[#3454c5] text-white font-medium text-xs rounded-none transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.99]"
             >
               {isSuccessful || isPending ? (
                 <span className="flex items-center gap-2">
-                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                  Verifying...
+                  <span className="h-3 w-3 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  Verifying Credentials...
                 </span>
               ) : (
                 <>
                   Enter Workspace
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </>
               )}
             </button>
           </form>
 
-          {/* Verification Separator */}
-          <div className="relative flex items-center justify-center my-5 select-none">
-            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-zinc-200 dark:border-white/5"></div></div>
-            <span className="relative px-3 text-[9px] uppercase font-bold tracking-[0.16em] text-zinc-400 dark:text-zinc-500 bg-white dark:bg-[#080D1A] transition-colors duration-300">
+          {/* Identity Separator Bar */}
+          <div className="relative flex items-center justify-center select-none py-1">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-100"></div>
+            </div>
+            <span className="relative px-3 text-[9px] uppercase font-bold tracking-widest text-zinc-400 bg-white">
               Identity Verification
             </span>
           </div>
 
-          {/* Premium Google Button Wrapper */}
+          {/* Clean, Flat Google Authentication Wrapper */}
           <button
             type="button"
             disabled={isGoogleLoading}
             onClick={handleGoogleSignIn}
-            className="w-full h-11 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#080D1A] text-[#17140f] dark:text-white font-bold text-[14px] tracking-wide transition-all hover:bg-zinc-50 dark:hover:bg-white/5 flex items-center justify-center gap-3 active:scale-[0.99] disabled:opacity-70 disabled:pointer-events-none cursor-pointer group shadow-xs"
+            className="w-full h-11 border border-zinc-200 bg-white text-zinc-700 font-medium text-xs transition-colors hover:bg-zinc-50 flex items-center justify-center gap-2.5 rounded-none active:scale-[0.99] disabled:opacity-50 disabled:pointer-events-none"
           >
-            <svg className="h-4.5 w-4.5 shrink-0" viewBox="0 0 24 24">
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -207,32 +204,27 @@ export default function Page() {
             Continue with Google Account
           </button>
 
-          {/* System Footer Navigation */}
-          <p className="mt-5 text-center text-[13px] text-zinc-500 dark:text-zinc-400 font-medium">
+          {/* Portal Footer Reference */}
+          <p className="text-center text-xs text-zinc-400 font-normal pt-2">
             New candidate to the ecosystem?{" "}
             <Link
-              className="font-bold text-[#4169E1] hover:underline transition-all"
+              className="font-bold text-[#4169E1] hover:underline"
               href={`/register?callbackUrl=${callbackUrl}`}
             >
               Create an account
             </Link>
+            .
           </p>
         </div>
       </div>
 
-      {/* ─── RIGHT PANEL: IMMERSIVE LAW STUDENT IMAGE HUB (55% Width) ─── */}
-      <div className="hidden lg:flex lg:w-[58%] xl:w-[62%] relative h-full bg-[#080D1A] overflow-hidden select-none">
-
-        {/* The Generated Graphic: Set to perfectly fill the space without scrolling */}
+      {/* ─── RIGHT PANEL: IMMERSIVE LAW STUDENT DESIGN CANVAS (55% Width) ─── */}
+      <div className="hidden lg:flex lg:w-[55%] xl:w-[60%] relative h-full bg-white select-none">
         <img
-          src="/login-bg.png" // Replace with your generated image path
-          alt="Juristo Prep OS Intelligence Engine Layout"
-          className="absolute inset-0 w-full h-full object-cover opacity-90 transition-opacity duration-700"
+          src="/login-bg.png"
+          alt="Juristo Student Portal Active Learning Illustration"
+          className="absolute inset-0 w-full h-full object-cover object-center animate-in fade-in duration-700"
         />
-
-        {/* Subtle Dark Overlays to ensure contrast against ambient lights */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A] via-transparent to-[#080D1A]/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1135]/40 via-transparent to-transparent" />
       </div>
 
       <ForgotPasswordModal

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { downgradeExpiredPaidPlans } from "@/lib/billing/plan-cycle";
 
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import {
   checkoutSession,
   liveChatSession,

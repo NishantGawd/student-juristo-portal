@@ -3,6 +3,7 @@ import { getToken } from "next-auth/jwt";
 import { guestRegex } from "./lib/constants";
 
 const PUBLIC_FILE = /\.(.*)$/;
+// Point to the active, functional CLAT cockpit workspace page 
 const DEFAULT_AUTH_REDIRECT = "/clat-exam?tab=dashboard";
 
 function getSafeRedirect(pathname: string | null) {
@@ -13,7 +14,8 @@ function getSafeRedirect(pathname: string | null) {
   if (
     pathname === "/" ||
     pathname.startsWith("/login") ||
-    pathname.startsWith("/register")
+    pathname.startsWith("/register") ||
+    pathname.startsWith("/dashboard") // Intercept and map dead dashboard route paths
   ) {
     return DEFAULT_AUTH_REDIRECT;
   }
@@ -45,7 +47,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 3. Define public routes (Cleaned of lawyer & corporate paths)
+  // 3. Define public routes
   const publicRoutes = [
     "/",
     "/login",
@@ -70,8 +72,12 @@ export async function proxy(request: NextRequest) {
     secureCookie: isHttps,
   });
 
-  // 5. ISOLATED AUTHENTICATION CHECK
   const hasValidSession = !!token;
+
+  // 5. REDIRECT DEAD OVERHEAD PATHS INSTANTLY
+  if (pathname === "/dashboard") {
+    return NextResponse.redirect(new URL(DEFAULT_AUTH_REDIRECT, request.url));
+  }
 
   // Prevent logged-in users from accessing auth pages (Kills the Loop)
   if (hasValidSession && ["/login", "/register"].includes(pathname)) {
@@ -81,9 +87,17 @@ export async function proxy(request: NextRequest) {
     );
   }
 
+  // ─── INITIALIZE HEADER BINDING PROXY FOR INTERNAL SECTIONS ───
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-url", pathname); // Maps custom track index parameter globally
+
   // 6. Public route? Let unauthenticated users pass.
   if (isPublicRoute) {
-    return NextResponse.next();
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
   }
 
   // 7. Protected route & Not authenticated? Redirect to login.
@@ -113,7 +127,12 @@ export async function proxy(request: NextRequest) {
     );
   }
 
-  return NextResponse.next();
+  // Pass request headers through natively to allow layout hooks to map routing constraints safely
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
 }
 
 export const config = {

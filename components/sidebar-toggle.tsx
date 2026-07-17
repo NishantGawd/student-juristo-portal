@@ -27,7 +27,7 @@ export function SidebarToggle({
       <TooltipTrigger asChild>
         <Button
           className={cn(
-            "h-8 w-8 p-0 text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors duration-200 ease-in-out",
+            "h-9 w-9 p-0 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors duration-200 ease-in-out rounded-none border border-transparent",
             className
           )}
           data-sidebar-toggle-scope={toggleScope}
@@ -45,10 +45,10 @@ export function SidebarToggle({
       <TooltipContent 
         align="start" 
         side="bottom" 
-        className="hidden md:flex md:items-center md:gap-1.5 font-medium text-[12px]"
+        className="hidden md:flex md:items-center md:gap-2 font-bold text-[10px] uppercase tracking-wider rounded-none border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] text-zinc-900 dark:text-white shadow-sm px-3 py-1.5"
       >
         Toggle Sidebar
-        <kbd className="pointer-events-none inline-flex h-4.5 select-none items-center gap-0.5 rounded border bg-muted px-1.5 font-mono font-medium text-[9px] text-muted-foreground">
+        <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-0.5 rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#080D1A] px-1.5 font-mono text-[9px] text-zinc-500 dark:text-zinc-400">
           <span className="text-[10px]">⌘</span>B
         </kbd>
       </TooltipContent>

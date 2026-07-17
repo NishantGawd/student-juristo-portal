@@ -1,4 +1,4 @@
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { notification } from "@/lib/db/schema";
 import { sendEmail, type EmailAttachment } from "@/lib/email/index";
 import { NotificationTemplates } from "./templates";

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db/queries"; 
+import { db } from "@/lib/db";
 import { chat, message } from "@/lib/db/schema"; 
 import { eq, asc } from "drizzle-orm";
 import { generateUUID } from "@/lib/utils";

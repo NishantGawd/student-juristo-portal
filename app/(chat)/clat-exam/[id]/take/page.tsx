@@ -10,8 +10,7 @@ import { QuizSessionClient } from "./quiz-session-client";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Take CLAT Mock Test",
-  description:
-    "Take a private Juristo AI CLAT mock test or practice quiz with timed questions and performance tracking.",
+  description: "Take a private Juristo AI CLAT mock test or practice quiz with timed questions and performance tracking.",
   path: "/clat-exam/take",
   noIndex: true,
 });
@@ -28,7 +27,6 @@ export default async function QuizSessionPage({
 
   const { id } = await params;
 
-  // Fetch quiz and its questions
   const quizData = await db.query.quiz.findFirst({
     where: eq(quiz.id, id),
   });
@@ -38,7 +36,7 @@ export default async function QuizSessionPage({
   }
 
   if (quizData.status === "completed") {
-    redirect(`/clat-exam/${id}`); // Redirect to results if already completed
+    redirect(`/clat-exam/${id}`);
   }
 
   const questions = await db
@@ -48,29 +46,13 @@ export default async function QuizSessionPage({
 
   return (
     <div
-      className="min-h-screen bg-[#eaf3fb] text-slate-950"
+      className="min-h-screen bg-zinc-50 dark:bg-[#080D1A] text-zinc-900 dark:text-zinc-100"
       data-clat-test-room="true"
-      data-theme="light"
       style={
         {
-          colorScheme: "light",
-          "--accent": "hsl(240 4.8% 95.9%)",
-          "--accent-foreground": "hsl(240 5.9% 10%)",
-          "--background": "hsl(0 0% 100%)",
+          colorScheme: "light dark",
+          "--background": "transparent",
           "--border": "hsl(240 5.9% 90%)",
-          "--card": "hsl(0 0% 100%)",
-          "--card-foreground": "hsl(240 10% 3.9%)",
-          "--foreground": "hsl(240 10% 3.9%)",
-          "--input": "hsl(240 5.9% 90%)",
-          "--muted": "hsl(240 4.8% 95.9%)",
-          "--muted-foreground": "hsl(240 3.8% 46.1%)",
-          "--popover": "hsl(0 0% 100%)",
-          "--popover-foreground": "hsl(240 10% 3.9%)",
-          "--primary": "hsl(240 5.9% 10%)",
-          "--primary-foreground": "hsl(0 0% 98%)",
-          "--ring": "hsl(240 10% 3.9%)",
-          "--secondary": "hsl(240 4.8% 95.9%)",
-          "--secondary-foreground": "hsl(240 5.9% 10%)",
         } as CSSProperties
       }
     >

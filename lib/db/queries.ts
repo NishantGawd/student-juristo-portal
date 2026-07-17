@@ -49,16 +49,7 @@ import {
 } from "./schema";
 import { generateHashedPassword } from "./utils";
 import * as schema from "./schema";
-
-const client = postgres(process.env.POSTGRES_URL!, {
-  connect_timeout: 30,
-  idle_timeout: 20,
-  max_lifetime: 60 * 10,
-});
-
-export const db = drizzle(client, {
-  schema,
-});
+import { db } from ".";
 
 export async function getUser(email: string): Promise<User[]> {
   try {
@@ -999,28 +990,6 @@ export async function getContractPurchase({
   }
 }
 
-export async function getContractPurchasesByUserId({
-  userId,
-}: {
-  userId: string;
-}): Promise<ContractPurchase[]> {
-  try {
-    return await db
-      .select()
-      .from(contractPurchase)
-      .where(
-        and(
-          eq(contractPurchase.userId, userId)
-        )
-      )
-      .orderBy(desc(contractPurchase.createdAt));
-  } catch (_error) {
-    throw new ChatSDKError(
-      "bad_request:database",
-      "Failed to get contract purchases by user id"
-    );
-  }
-}
 
 export async function createContractPurchase({
   userId,

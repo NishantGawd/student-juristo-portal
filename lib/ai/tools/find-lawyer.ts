@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { tool } from "ai";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { lawyer } from "@/lib/db/schema";
 import { eq, or, and, sql } from "drizzle-orm";
 

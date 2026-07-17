@@ -11,6 +11,7 @@ import { getUserById } from "@/lib/db/queries";
 import { auth } from "../(auth)/auth";
 import { serverUpdateChatVisibility } from "./chat-actions";
 import { QuizAnnouncementModal } from "@/components/quiz-announcement-modal";
+import { LayoutContentShell } from "./layout-content-shell";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -37,7 +38,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 function LayoutSkeleton() {
   return (
     <div className="flex h-dvh w-full overflow-hidden">
-      {/* Sidebar Skeleton */}
       <div className="hidden w-64 flex-col space-y-4 border-r bg-sidebar p-4 md:flex">
         <Skeleton className="h-8 w-32" />
         <Skeleton className="h-10 w-full" />
@@ -48,7 +48,6 @@ function LayoutSkeleton() {
         </div>
       </div>
 
-      {/* Main Content Skeleton */}
       <div className="flex-1 space-y-4 p-4 md:p-6">
         <Skeleton className="h-8 w-48" />
         <Skeleton className="h-[calc(100vh-120px)] w-full rounded-xl" />
@@ -60,7 +59,6 @@ function LayoutSkeleton() {
 async function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [session, cookieStore] = await Promise.all([auth(), cookies()]);
 
-  const isCollapsed = cookieStore.get("sidebar_state")?.value !== "true";
   let showQuizModal = false;
   let sidebarUser = session?.user;
   
@@ -91,16 +89,12 @@ async function SidebarWrapper({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <SidebarProvider defaultOpen={false}>
-      <AppSidebar
-        globalUpdateChatVisibilityAction={serverUpdateChatVisibility}
-        user={sidebarUser}
-      />
-      <GlobalSidebarToggle />
-      <SidebarInset className="overflow-x-hidden">
-        {children}
-        {showQuizModal && <QuizAnnouncementModal />}
-      </SidebarInset>
-    </SidebarProvider>
+    <LayoutContentShell 
+      sidebarUser={sidebarUser} 
+      serverUpdateChatVisibility={serverUpdateChatVisibility}
+      showQuizModal={showQuizModal}
+    >
+      {children}
+    </LayoutContentShell>
   );
 }

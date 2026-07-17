@@ -1,15 +1,14 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, FileText, PlayCircle } from "lucide-react";
+import { ChevronLeft, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Updated for Next.js 15: params is now a Promise
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// 1. Helper to decode the slug back into usable data mapping to your pyq_pdfs folder
+// Helper to decode the slug back into usable data mapping to your pyq_pdfs folder
 function decodeSlug(slug: string) {
   if (!slug) return null;
   
@@ -20,18 +19,15 @@ function decodeSlug(slug: string) {
   let set = "Official Paper";
   
   if (matches[2]) {
-    // Converts "set-a" back to "Set A"
     set = matches[2].replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   }
 
-  // Map back to your exact PDF filenames in the public/pyq_pdfs folder
-  let pdfPath = `/pyq_pdfs/${year}.pdf`; // Default for 2023 to 2008 official papers
+  let pdfPath = `/pyq_pdfs/${year}.pdf`;
   if (set === "Set A") pdfPath = `/pyq_pdfs/${year}-set A.pdf`;
   if (set === "Set B") pdfPath = `/pyq_pdfs/${year}-set B.pdf`;
   if (set === "Set C") pdfPath = year === "2024" ? `/pyq_pdfs/2024 set C.pdf` : `/pyq_pdfs/${year}-set C.pdf`;
   if (set === "Set D") pdfPath = `/pyq_pdfs/${year}-set D.pdf`;
 
-  // Restore the KnowledgeNation link specifically for 2025 Set A
   if (year === "2025" && set === "Set A") {
     pdfPath = "https://knowledgenation.co.in/images/clat-2025-question-paper.pdf";
   }
@@ -39,9 +35,8 @@ function decodeSlug(slug: string) {
   return { year, set, pdfPath };
 }
 
-// 2. Generate Dynamic SEO Meta Tags for Google Bots
+// Generate Dynamic SEO Meta Tags
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Await the params promise before accessing the slug
   const resolvedParams = await params;
   const details = decodeSlug(resolvedParams.slug);
   
@@ -66,59 +61,60 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// 3. Render the UI
 export default async function ClatPyqSeoPage({ params }: PageProps) {
-  // Await the params promise before accessing the slug
   const resolvedParams = await params;
   const details = decodeSlug(resolvedParams.slug);
 
   if (!details) {
-    notFound(); // Triggers your Next.js 404 page if the URL is invalid
+    notFound();
   }
 
   return (
-    <div className="flex h-screen w-full flex-col bg-background font-sans">
-      {/* Top Navigation Bar */}
-      <header className="flex shrink-0 items-center justify-between border-b bg-card px-4 py-3 shadow-sm md:px-6 md:py-4">
+    <div className="flex h-screen w-full flex-col bg-white dark:bg-[#0C1222] font-sans text-zinc-900 dark:text-zinc-100 selection:bg-[#4169E1]/10 selection:text-[#4169E1]">
+      
+      {/* ─── PREMIUM OUTLINED TOP NAVIGATION HEADER ─── */}
+      <header className="flex shrink-0 items-center justify-between border-b border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] px-4 py-3 md:px-6 md:py-4 select-none">
         
-        {/* ADDED ml-10 md:ml-12 HERE: This pushes the back button rightwards, clearing the sidebar toggle */}
-        <div className="flex items-center gap-2 md:gap-4 ml-10 md:ml-12">
+        {/* Margin adjusted to push elements comfortably clearing sidebar icons */}
+        <div className="flex items-center gap-4 ml-12 md:ml-14">
           
-          {/* Desktop Back Button */}
-          <Button asChild size="sm" variant="ghost" className="hidden md:flex">
+          {/* Desktop Back Trigger */}
+          <Button asChild size="sm" variant="ghost" className="hidden md:flex rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 font-medium text-xs uppercase tracking-wider text-zinc-700 dark:text-zinc-300 h-9 px-4">
             <Link href="/clat-exam?tab=pyq">
-              <ChevronLeft className="mr-1 h-4 w-4" />
+              <ChevronLeft className="mr-1.5 h-3.5 w-3.5" />
               Back
             </Link>
           </Button>
           
-          {/* Mobile Back Button */}
-          <Button asChild size="icon" variant="ghost" className="md:hidden">
+          {/* Mobile Back Trigger */}
+          <Button asChild size="icon" variant="ghost" className="md:hidden rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 h-9 w-9">
             <Link href="/clat-exam?tab=pyq">
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4" />
             </Link>
           </Button>
 
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#080D1A] text-zinc-500 dark:text-zinc-400">
               <FileText className="h-4 w-4" />
             </div>
-            <div>
-              <h1 className="text-sm font-bold tracking-tight md:text-lg">
+            <div className="text-left space-y-0.5">
+              <h1 className="text-sm md:text-base font-bold tracking-tight text-zinc-900 dark:text-white font-serif">
                 CLAT {details.year} Past Paper
               </h1>
-              <p className="text-xs text-muted-foreground">{details.set}</p>
+              <p className="text-[10px] font-mono font-bold uppercase text-[#4169E1] tracking-wider leading-none">
+                {details.set}
+              </p>
             </div>
           </div>
         </div>
       </header>
 
-      {/* The Embedded PDF Viewer */}
-      <main className="flex-1 bg-muted/30 p-2 md:p-6">
-        <div className="h-full w-full overflow-hidden rounded-xl border bg-background shadow-lg">
+      {/* ─── FULL-WIDTH EMBEDDED DOCUMENT VIEWPORT ─── */}
+      <main className="flex-1 bg-zinc-50 dark:bg-[#080D1A]/40 p-2 md:p-6">
+        <div className="h-full w-full overflow-hidden rounded-none border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] shadow-none">
           <iframe
             src={`${details.pdfPath}#toolbar=1&navpanes=0`}
-            className="h-full w-full"
+            className="h-full w-full invert-0 dark:brightness-[0.95] dark:contrast-[1.05]"
             title={`CLAT ${details.year} ${details.set} Question Paper PDF`}
           />
         </div>

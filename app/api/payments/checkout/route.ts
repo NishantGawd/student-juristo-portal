@@ -2,7 +2,7 @@ import { auth } from "@/app/(auth)/auth";
 import { createRazorpayOrder, createRazorpaySubscription, PLAN_PRICES, type PlanType } from "@/lib/razorpay";
 import { generateUUID } from "@/lib/utils";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { sql } from "drizzle-orm";
 
 export async function POST(request: Request) {
@@ -117,4 +117,4 @@ export async function POST(request: Request) {
         console.error("Checkout error:", error);
         return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
     }
-}
+}

@@ -2,7 +2,7 @@ import "server-only";
 import { headers } from "next/headers";
 
 import { userActivityEvent, userKeywordInsight } from "@/lib/db/schema";
-import { db } from "@/lib/db/queries";
+import { db } from "../db";
 
 type TrackActivityInput = {
   userId: string;

@@ -8,17 +8,10 @@ import {
   Loader2,
   PlayCircle,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { CLAT_SECTIONS } from "../clat-config";
 
 export function generatePyqSlug(year: string, set: string) {
@@ -144,143 +137,150 @@ export function PyqTab({
   const isGenerating = Boolean(activeGenerationKey);
 
   return (
-    <div className="fade-in slide-in-from-bottom-4 flex animate-in flex-col gap-6 pb-16 duration-500 w-full text-zinc-900 dark:text-zinc-100 select-none">
-      
-      {/* ─── HERO REGION ─── */}
-      <section className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-[#080D1A]/40 backdrop-blur-md relative">
-        <div className="absolute top-0 right-0 w-96 h-full bg-gradient-to-l from-[#4169E1]/5 to-transparent pointer-events-none" />
-        
-        <div className="flex flex-col gap-6 p-6 md:p-8 md:flex-row md:items-center md:justify-between relative z-10">
-          <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#4169E1]/20 bg-[#4169E1]/10 px-3 py-1 text-xs font-bold text-[#4169E1] shadow-3xs uppercase tracking-wider">
-              <FileCheck2 className="h-3.5 w-3.5" />
-              Verified PDF Document Repositories Active
-            </div>
-            
-            <div className="space-y-1.5">
-              <h2 className="font-black text-2xl md:text-3xl tracking-tight text-zinc-900 dark:text-white">
-                Real Previous-Year Paper Workspace
-              </h2>
-              <p className="text-zinc-500 dark:text-zinc-400 text-[14px] leading-relaxed font-normal">
-                Deploy authentic historical CLAT papers and final evaluation keys as absolute pillars of truth. Core processes strictly map the structural patterns without question item hallucination.
-              </p>
-            </div>
-          </div>
+    <div className="w-full px-6 py-0.5 space-y-12 animate-in fade-in duration-300 text-zinc-900 dark:text-zinc-100 selection:bg-[#4169E1]/10 selection:text-[#4169E1]">
 
-          {/* Core Technical Parameter Specifications Grid */}
-          <div className="grid grid-cols-3 gap-3 rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#080D1A] p-4 text-center min-w-[260px] shadow-2xs shrink-0">
-            <div className="flex flex-col">
-              <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider">Data Source</span>
-              <strong className="text-zinc-800 dark:text-zinc-200 text-xs font-black mt-1">Official PDF</strong>
-            </div>
-            <div className="flex flex-col border-x border-zinc-100 dark:border-white/5">
-              <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider">Interval Index</span>
-              <strong className="text-zinc-800 dark:text-zinc-200 text-xs font-black mt-1">1 Min / Q</strong>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider">Metric Log</span>
-              <strong className="text-[#4169E1] text-xs font-black mt-1">Net Score</strong>
-            </div>
+      {/* ─── EXACT HEAD-TO-HEAD REPLICA BAR GRID CONTAINER ─── */}
+      <div className="w-full border border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-[#0C1222] p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 select-none rounded-none shadow-2xs">
+        <div className="text-left space-y-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#4169E1]/20 bg-[#4169E1]/10 px-3 py-1 text-xs font-bold text-[#4169E1] shadow-3xs uppercase tracking-wider">
+            <FileCheck2 className="h-3.5 w-3.5" />
+            Verified PDF Document Repositories Active
+          </div>
+          
+          <div className="space-y-1">
+            <h2 className="font-black text-2xl md:text-3xl tracking-tight text-zinc-900 dark:text-white font-serif">
+              Real Previous-Year Paper Workspace
+            </h2>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm font-normal max-w-2xl leading-relaxed">
+              Deploy authentic historical CLAT papers and final evaluation keys as absolute pillars of truth. Core processes strictly map the structural patterns without question item hallucination.
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* Sharp Box Parameter Ribbon Aligned Right */}
+        <div className="flex items-stretch border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#080D1A] rounded-none divide-x divide-zinc-200 dark:divide-white/10 text-center min-w-[280px] shadow-2xs shrink-0 font-sans">
+          <div className="flex-1 p-3.5 flex flex-col justify-center text-left">
+            <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider block">Data Source</span>
+            <strong className="text-zinc-800 dark:text-zinc-200 text-xs font-black mt-0.5">Official PDF</strong>
+          </div>
+          <div className="flex-1 p-3.5 flex flex-col justify-center text-left">
+            <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider block">Interval Index</span>
+            <strong className="text-zinc-800 dark:text-zinc-200 text-xs font-black mt-0.5">1 Min / Q</strong>
+          </div>
+          <div className="flex-1 p-3.5 flex flex-col justify-center text-left">
+            <span className="font-bold text-zinc-400 dark:text-zinc-500 text-[9px] uppercase tracking-wider block">Metric Log</span>
+            <strong className="text-[#4169E1] text-xs font-black mt-0.5">Net Score</strong>
+          </div>
+        </div>
+      </div>
 
       {/* ─── IMMERSIVE PYQ PAPERS DRILLING GRID DECK ─── */}
-      <section className="grid gap-5 grid-cols-1 md:grid-cols-2 w-full items-stretch">
-        {REAL_PYQ_PAPERS.map((paper) => {
-          const loading = activeGenerationKey === getPyqGenerationKey(paper);
-          return (
-            <Card
-              className="rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#080D1A]/40 p-5 text-left transition-all duration-300 hover:border-[#4169E1] hover:shadow-md flex flex-col justify-between min-h-[340px] relative overflow-hidden group"
-              key={`${paper.year}-${paper.set}`}
-            >
-              <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-emerald-500 via-[#4169E1] to-amber-500 opacity-60 dark:opacity-80 group-hover:opacity-100 transition-opacity" />
-              
-              <CardHeader className="p-0 space-y-3.5 w-full shrink-0">
-                <div className="flex items-start justify-between gap-4 w-full">
-                  <div className="space-y-1">
-                    <CardTitle className="flex items-center gap-2 text-[16px] font-black tracking-tight text-zinc-900 dark:text-white">
-                      <CalendarClock className="h-4.5 w-4.5 text-[#4169E1]" />
-                      {paper.year} — {paper.set}
-                    </CardTitle>
-                    <CardDescription className="text-zinc-500 dark:text-zinc-400 text-[13px] leading-relaxed font-normal pt-0.5">
-                      {paper.focus}
-                    </CardDescription>
-                  </div>
-                  
-                  <Badge className="rounded-md border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 shrink-0 shadow-3xs" variant="outline">
-                    {paper.sourceLabel}
-                  </Badge>
-                </div>
-              </CardHeader>
+      <div className="space-y-3 text-left pt-2">
+        <div className="space-y-1.5 border-b border-zinc-100 dark:border-white/5 pb-2 select-none">
+          <span className="text-[10px] font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase block">
+            Historical Blueprint Examination Repositories
+          </span>
+          <p className="text-zinc-500 dark:text-zinc-400 text-xs font-normal leading-normal">
+            Select an official past paper matrix sequence below to mount structural execution runs instantly.
+          </p>
+        </div>
 
-              {/* Central Weight Mapping Distribution Area */}
-              <CardContent className="p-0 mt-5 space-y-4 w-full flex-1 flex flex-col justify-end">
-                <div className="grid grid-cols-5 gap-1.5 w-full select-none">
-                  {CLAT_SECTIONS.slice(0, 5).map((section) => (
-                    <div
-                      className="rounded-xl border border-zinc-100 dark:border-white/5 bg-zinc-50/50 dark:bg-[#080D1A] py-2 text-center shadow-3xs"
-                      key={section.name}
-                    >
-                      <p className="font-bold text-[9px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block">
-                        {section.shortName}
-                      </p>
-                      <p className="font-extrabold text-[12px] text-zinc-800 dark:text-zinc-300 mt-0.5 font-mono">
-                        {section.weight}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full items-stretch">
+          {REAL_PYQ_PAPERS.map((paper) => {
+            const loading = activeGenerationKey === getPyqGenerationKey(paper);
+            return (
+              <Card
+                className="group border border-zinc-200 dark:border-white/5 bg-white dark:bg-[#0C1222] p-6 flex flex-col justify-between text-left transition-all hover:border-[#4169E1] dark:hover:border-[#4169E1] hover:bg-zinc-50/20 dark:hover:bg-white/5 min-h-[310px] rounded-none shadow-none relative"
+                key={`${paper.year}-${paper.set}`}
+              >
+                <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-emerald-500 via-[#4169E1] to-amber-500 opacity-40 dark:opacity-60 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="space-y-3.5 w-full shrink-0">
+                  <div className="flex items-start justify-between gap-4 w-full">
+                    <div className="space-y-1">
+                      <h3 className="flex items-center gap-2 text-base font-bold tracking-tight text-zinc-900 dark:text-white font-serif">
+                        <CalendarClock className="h-4.5 w-4.5 text-[#4169E1]" />
+                        {paper.year} — {paper.set}
+                      </h3>
+                      <p className="text-zinc-500 dark:text-zinc-400 text-xs leading-relaxed font-normal pt-0.5">
+                        {paper.focus}
                       </p>
                     </div>
-                  ))}
+                    
+                    <Badge className="rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 shrink-0 shadow-none" variant="outline">
+                      {paper.sourceLabel}
+                    </Badge>
+                  </div>
                 </div>
 
-                {/* Micro Validation Anchor Strip */}
-                <div className="flex items-center gap-2.5 rounded-xl border border-emerald-500/10 dark:border-emerald-500/20 bg-emerald-500/5 px-3 py-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold shadow-3xs">
-                  <ShieldCheck className="h-4 w-4 shrink-0 fill-emerald-500/5" />
-                  <span>
-                    Pipeline locking initialized: Zero generative fabrication allowed.
-                  </span>
-                </div>
+                {/* Central Weight Mapping Distribution Row */}
+                <div className="mt-5 space-y-4 w-full flex-1 flex flex-col justify-end">
+                  <div className="grid grid-cols-5 gap-2 w-full select-none">
+                    {CLAT_SECTIONS.slice(0, 5).map((section) => (
+                      <div
+                        className="border border-zinc-100 dark:border-white/5 bg-zinc-50/40 dark:bg-[#080D1A] py-2 text-center"
+                        key={section.name}
+                      >
+                        <p className="font-bold text-[8px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider block">
+                          {section.shortName}
+                        </p>
+                        <p className="font-bold text-xs text-zinc-700 dark:text-zinc-300 mt-0.5 font-mono">
+                          {section.weight}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Dynamic Asset Download Paths */}
-                <div className="grid gap-2.5 grid-cols-2 w-full pt-0.5">
-                  <Button asChild className="h-9 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 font-bold text-xs uppercase tracking-wider shadow-3xs cursor-pointer text-zinc-700 dark:text-zinc-300" variant="outline">
-                    <a href={`/clat-pyq/${generatePyqSlug(paper.year, paper.set)}`} rel="noreferrer">
-                      <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
-                      Paper PDF
-                    </a>
-                  </Button>
+                  {/* Micro Validation Anchor Validation Strip */}
+                  <div className="flex items-center gap-2.5 border border-emerald-500/10 dark:border-emerald-500/20 bg-emerald-500/5 px-3 py-2 text-emerald-600 dark:text-emerald-400 text-[11px] font-medium">
+                    <ShieldCheck className="h-4 w-4 shrink-0" />
+                    <span>
+                      Pipeline verification loop locked: Zero generative fabrication variables.
+                    </span>
+                  </div>
 
-                  {paper.answerKeyUrl ? (
-                    <Button asChild className="h-9 rounded-xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 font-bold text-xs uppercase tracking-wider shadow-3xs cursor-pointer text-zinc-700 dark:text-zinc-300" variant="outline">
-                      <a href={paper.answerKeyUrl} rel="noreferrer" target="_blank">
-                        <Download className="mr-1.5 h-3.5 w-3.5" />
-                        Answer Key
+                  {/* Dynamic External Link Extraction Buttons Grid */}
+                  <div className="grid gap-2.5 grid-cols-2 w-full pt-0.5">
+                    <Button asChild className="h-9 rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 font-medium text-xs uppercase tracking-wider cursor-pointer text-zinc-700 dark:text-zinc-300 shadow-none" variant="outline">
+                      <a href={`/clat-pyq/${generatePyqSlug(paper.year, paper.set)}`} rel="noreferrer">
+                        <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
+                        Paper PDF
                       </a>
                     </Button>
-                  ) : (
-                    <div className="flex h-9 items-center justify-center rounded-xl border border-zinc-100 dark:border-white/5 bg-zinc-50/50 dark:bg-black/10 px-3 text-zinc-400 dark:text-zinc-500 text-center font-bold text-[11px] uppercase tracking-wider select-none shadow-3xs">
-                      Key Embedded
-                    </div>
-                  )}
-                </div>
 
-                {/* Primary Button */}
-                <Button
-                  className="w-full h-10 rounded-xl bg-[#4169E1] hover:bg-[#4169E1]/90 text-white font-bold text-xs tracking-wider uppercase shadow-md flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.99] disabled:opacity-50"
-                  disabled={isGenerating}
-                  onClick={() => onCreatePyq(paper)}
-                >
-                  {loading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <PlayCircle className="h-4 w-4" />
-                  )}
-                  Create 30Q Real PYQ Drill
-                </Button>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </section>
+                    {paper.answerKeyUrl ? (
+                      <Button asChild className="h-9 rounded-none border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-white/5 hover:bg-zinc-100 dark:hover:bg-white/10 font-medium text-xs uppercase tracking-wider cursor-pointer text-zinc-700 dark:text-zinc-300 shadow-none" variant="outline">
+                        <a href={paper.answerKeyUrl} rel="noreferrer" target="_blank">
+                          <Download className="mr-1.5 h-3.5 w-3.5" />
+                          Answer Key
+                        </a>
+                      </Button>
+                    ) : (
+                      <div className="flex h-9 items-center justify-center border border-zinc-100 dark:border-white/5 bg-zinc-50/50 dark:bg-black/10 px-3 text-zinc-400 dark:text-zinc-500 text-center font-bold text-[10px] uppercase tracking-wider select-none">
+                        Key Embedded
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Primary Trigger Execution Button */}
+                  <button
+                    disabled={isGenerating}
+                    onClick={() => onCreatePyq(paper)}
+                    className="w-full h-10 bg-[#4169E1] hover:bg-[#3454c5] text-white font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer transition-colors active:scale-[0.99] disabled:opacity-50"
+                  >
+                    {loading ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                    ) : (
+                      <PlayCircle className="h-3.5 w-3.5" />
+                    )}
+                    Create 30Q Real PYQ Drill
+                  </button>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
 
     </div>
   );

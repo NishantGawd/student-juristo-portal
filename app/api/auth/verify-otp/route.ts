@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { phoneVerification } from "@/lib/db/schema";
 import { eq, and, gt, desc } from "drizzle-orm";
 import { auth } from "@/app/(auth)/auth";

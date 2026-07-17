@@ -523,57 +523,52 @@ export function QuizHubClient({
       <main
         className={`flex flex-1 flex-col gap-6 overflow-y-auto px-4 py-6 transition-all duration-300 md:px-8 lg:px-12 ${isChatOpen ? "pr-4 md:pr-8" : ""}`}
       >
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200 dark:border-zinc-800 pb-6 text-zinc-950 dark:text-zinc-50 select-none transition-colors duration-200">
+        <div className="mx-auto flex w-full max-w-7xl flex-col md:flex-row md:items-center justify-between gap-6 border-b border-zinc-100 dark:border-white/5 pb-6 text-zinc-900 dark:text-zinc-100 select-none transition-colors duration-200">
 
-          {/* Minimalist Header Engine Title */}
-          <div className="space-y-1">
-            <h1 className="text-xl font-bold tracking-tight sm:text-2xl flex items-center gap-2">
-              CLAT Prep OS
-              <span className="text-[10px] font-medium tracking-normal px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/60">
+          {/* ─── SYSTEM IDENTITY BLOCK (Heavy Branding Font Configuration) ─── */}
+          <div className="space-y-1 text-left">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white uppercase font-sans">
+                CLAT Prep OS
+              </h1>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 tracking-wider uppercase border border-zinc-200 dark:border-white/10 font-sans">
                 Active
               </span>
-            </h1>
-            <p className="text-zinc-500 dark:text-zinc-400 text-sm font-normal">
+            </div>
+            <p className="text-sm text-zinc-400 dark:text-zinc-500 font-normal">
               Unified diagnostic metrics, mock pipelines, and adaptive learning vectors.
             </p>
           </div>
 
-          {/* Premium Borderless SaaS Telemetry Ribbon */}
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium sm:justify-end shrink-0">
+          {/* ─── PREMIUM SHARP OUTLINED TELEMETRY COMPARTMENT BOX ─── */}
+          <div className="flex items-stretch border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] rounded-none divide-x divide-zinc-200 dark:divide-white/10 shrink-0 select-none font-sans shadow-2xs">
 
             {/* Module Metric Slot 01: Completed Iterations */}
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[10px] font-bold">
-                Completed:
+            <div className="p-4 px-5 flex flex-col justify-center text-left space-y-0.5 min-w-[110px]">
+              <span className="uppercase tracking-widest font-bold text-[9px] block text-zinc-400 dark:text-zinc-500">
+                Completed
               </span>
-              <span className="font-mono text-sm font-bold text-zinc-900 dark:text-zinc-100">
+              <span className="text-base font-bold text-zinc-900 dark:text-white font-mono leading-none">
                 {completedQuizzes}
               </span>
             </div>
 
-            {/* Elegant Structural Divider Line */}
-            <div className="hidden sm:block h-3.5 w-[1px] bg-zinc-200 dark:bg-zinc-800" />
-
             {/* Module Metric Slot 02: Targeted Cycle */}
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[10px] font-bold">
-                Target:
+            <div className="p-4 px-5 flex flex-col justify-center text-left space-y-0.5 min-w-[110px]">
+              <span className="uppercase tracking-widest font-bold text-[9px] block text-zinc-400 dark:text-zinc-500">
+                Target Year
               </span>
-              <span className="text-sm font-bold text-[#4169E1]">
+              <span className="text-base font-bold text-[#4169E1] font-mono leading-none">
                 {profile?.targetYear || "2026"}
               </span>
             </div>
 
-            {/* Elegant Structural Divider Line */}
-            <div className="hidden sm:block h-3.5 w-[1px] bg-zinc-200 dark:bg-zinc-800" />
-
             {/* Module Metric Slot 03: Full Fragile Performance Display Area */}
-            <div className="flex items-center gap-2">
-              <span className="text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[10px] font-bold shrink-0">
-                Weak Area:
+            <div className="p-4 px-6 flex flex-col justify-center text-left space-y-0.5">
+              <span className="uppercase tracking-widest font-bold text-[9px] block text-zinc-400 dark:text-zinc-500">
+                Weak Area
               </span>
-              {/* Fixed: Truncate dropped, text allowed to flow naturally and completely */}
-              <span className="text-sm font-bold text-amber-600 dark:text-amber-400 whitespace-nowrap">
+              <span className="text-base font-bold text-amber-600 dark:text-amber-500 uppercase tracking-wide whitespace-nowrap leading-none">
                 {profile?.weakestSection || "Set profile"}
               </span>
             </div>
@@ -667,28 +662,28 @@ export function QuizHubClient({
       <aside
         className={`z-40 flex h-full flex-col border-l bg-background shadow-2xl transition-all duration-300 ease-in-out ${isChatOpen ? "w-full opacity-100 md:w-[460px]" : "w-0 overflow-hidden border-l-0 opacity-0"}`}
       >
-        <div className="flex shrink-0 flex-row items-center justify-between border-b bg-muted/30 p-3 shadow-sm">
-          <div className="flex items-center gap-2 font-semibold text-base">
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary shadow-sm">
-              <MessageCircle className="h-3.5 w-3.5" />
+        <div className="flex shrink-0 flex-row items-center justify-between border-b border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] p-4 select-none transition-colors">
+          <div className="flex items-center gap-3 font-serif font-bold text-base text-zinc-900 dark:text-white">
+            <div className="flex h-8 w-8 items-center justify-center border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-[#080D1A] text-[#4169E1]">
+              <MessageCircle className="h-4 w-4" />
             </div>
             AI Mentor
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Styled + New Chat Action button inserted natively next to close action */}
+            {/* Premium Sharp Outlined New Chat Action */}
             <Button
               size="sm"
               variant="outline"
               onClick={handleStartNewChatSession}
-              className="h-8 gap-1 rounded-full text-xs font-medium px-3 bg-background border-zinc-200 hover:border-zinc-300 shadow-sm"
+              className="h-9 gap-1.5 rounded-none text-xs font-medium px-4 bg-white dark:bg-[#080D1A] border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white shadow-none transition-colors cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" />
               New Chat
             </Button>
 
             <Button
-              className="h-8 w-8 rounded-full hover:bg-red-50 hover:text-red-600 text-zinc-400"
+              className="h-9 w-9 rounded-none hover:bg-red-50 dark:hover:bg-red-950/20 text-zinc-400 hover:text-red-600 border border-transparent hover:border-red-200 dark:hover:border-red-900/30 transition-colors cursor-pointer"
               onClick={() => setIsChatOpen(false)}
               size="icon"
               variant="ghost"

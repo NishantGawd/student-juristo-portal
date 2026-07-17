@@ -1,6 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { searchJuristoVectorTemplates } from "@/lib/db/upstash";
 import { lawyerContract } from "@/lib/db/schema";
 import { ilike, or, sql } from "drizzle-orm";

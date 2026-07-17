@@ -1,8 +1,5 @@
 import { tool } from "ai";
 import { z } from "zod";
-import { db } from "@/lib/db/queries";
-import { lawyerContract, adminContracts } from "@/lib/db/schema";
-import { eq, or } from "drizzle-orm";
 
 function extractTemplatePlaceholders(text: string): string[] {
     if (!text) return [];

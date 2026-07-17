@@ -4,8 +4,6 @@ import { extractTextFromPdf } from "@/lib/pdf";
 import { trackUserActivity } from "@/lib/activity/tracking";
 import { extractKeywordsFromText, createTextPreview } from "@/lib/activity/keywords";
 import {
-  db,
-  getContractBySlug,
   saveDocument,
   updateUserUsage,
 } from "@/lib/db/queries";
@@ -14,6 +12,7 @@ import { consultation, lawyerContract, contractReviewRequest } from "@/lib/db/sc
 import { eq, or, sql, ilike } from "drizzle-orm";
 import { getContractDraftingModel } from "@/lib/ai/providers";
 import { generateUUID } from "@/lib/utils";
+import { db } from "@/lib/db";
 
 // --- UTILITIES ---
 

@@ -3,7 +3,7 @@
 import type { UseChatHelpers } from "@ai-sdk/react";
 import type { UIMessage } from "ai";
 import equal from "fast-deep-equal";
-import { CheckIcon, Globe, Loader2, Mic, Plus, Search, X } from "lucide-react";
+import { CheckIcon, ChevronDown, Globe, Loader2, Mic, Plus, Search, X } from "lucide-react";
 import Image from "next/image";
 import useSWR, { useSWRConfig } from "swr";
 import {
@@ -166,7 +166,7 @@ const LiveWaveform = ({ stream }: { stream: MediaStream }) => {
 
     return () => {
       cancelAnimationFrame(animationId);
-      audioCtx.close().catch(() => {});
+      audioCtx.close().catch(() => { });
     };
   }, [stream]);
 
@@ -1023,7 +1023,7 @@ function ResearchToolsMenu({
           className={cn(
             "size-8 rounded-lg p-0 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
             (researchModeEnabled || webSearchEnabled) &&
-              "bg-primary/10 text-primary ring-1 ring-primary/30"
+            "bg-primary/10 text-primary ring-1 ring-primary/30"
           )}
           title="Open message tools"
           type="button"
@@ -1092,89 +1092,97 @@ function PureModelSelectorCompact({
     chatModels[0];
 
   return (
-    <ModelSelector onOpenChange={setOpen} open={open}>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <Tooltip delayDuration={150}>
         <TooltipTrigger asChild>
           <div>
-            <ModelSelectorTrigger asChild>
-              <Button className="h-8 justify-between px-2" variant="ghost">
-                <ModelSelectorLogo provider={selectedModel.provider} />
-                <ModelSelectorName>{selectedModel.name}</ModelSelectorName>
-              </Button>
-            </ModelSelectorTrigger>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-2.5 h-8 px-2.5 border border-zinc-200 dark:border-white/10 bg-zinc-50/50 dark:bg-[#080D1A] text-zinc-700 dark:text-zinc-300 font-medium text-xs rounded-none transition-colors hover:bg-zinc-100 dark:hover:bg-white/5 cursor-pointer outline-none focus:outline-none">
+                {/* ─── RESTORED: JURISTO BRAND LOGO INDICATOR ─── */}
+                <ModelSelectorLogo provider={selectedModel.provider} className="size-3.5 shrink-0" />
+                <span className="font-mono text-[10px] font-bold tracking-wider text-zinc-800 dark:text-zinc-200 uppercase">
+                  {selectedModel.name}
+                </span>
+                <ChevronDown className="h-3 w-3 opacity-50 transition-transform duration-200" />
+              </button>
+            </DropdownMenuTrigger>
           </div>
         </TooltipTrigger>
         <TooltipContent
           align="start"
-          className="z-[100] max-w-[260px] rounded-lg border bg-popover px-2 py-1 font-medium text-foreground text-xs leading-none shadow-lg"
+          className="z-[100] max-w-[260px] rounded-none border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] px-3 py-1.5 font-bold font-sans text-zinc-500 dark:text-zinc-400 text-[10px] uppercase tracking-wider shadow-none"
           side="top"
           sideOffset={8}
         >
-          <span className="block truncate whitespace-nowrap">
-            {(selectedModel as any).tooltip}
-          </span>
+          <span>{(selectedModel as any).tooltip}</span>
         </TooltipContent>
       </Tooltip>
-      <ModelSelectorContent>
-        <ModelSelectorList>
-          {Object.entries(modelsByProvider).map(
-            ([providerKey, providerModels]) => (
-              <ModelSelectorGroup
-                heading={PROVIDER_NAMES[providerKey] ?? providerKey}
-                key={providerKey}
-              >
-                {providerModels.map((model) => {
-                  const isDisabled = !canUseJuristoModel(userPlan, model.id);
-                  return (
-                    <Tooltip delayDuration={150} key={model.id}>
-                      <TooltipTrigger asChild>
-                        <div
-                          className={cn(
-                            "w-full cursor-pointer",
-                            isDisabled && "pointer-events-auto"
-                          )}
-                        >
-                          <ModelSelectorItem
-                            className={cn(isDisabled && "opacity-50")}
-                            onSelect={() => {
-                              if (isDisabled) {
-                                toast.error(getModelAccessError(userPlan, model.id));
-                                return;
-                              }
-                              onModelChange?.(model.id);
-                              setOpen(false);
-                            }}
-                            value={model.id}
-                          >
-                            <ModelSelectorLogo provider={model.provider} />
-                            <ModelSelectorName>{model.name}</ModelSelectorName>
-                            {model.id === selectedModel.id && (
-                              <CheckIcon className="ml-auto size-4 shrink-0" />
-                            )}
-                          </ModelSelectorItem>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent
-                        align="start"
-                        className="z-[100] max-w-[260px] rounded-lg border bg-popover px-2 py-1 font-medium text-foreground text-xs leading-none shadow-lg"
-                        side="right"
-                        sideOffset={8}
+
+      <DropdownMenuContent
+        align="start"
+        side="top"
+        sideOffset={6}
+        className="z-[100] min-w-[220px] rounded-none border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] p-1 shadow-none font-sans"
+      >
+        {Object.entries(modelsByProvider).map(([providerKey, providerModels]) => (
+          <div key={providerKey} className="space-y-0.5">
+            <DropdownMenuLabel className="px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+              {PROVIDER_NAMES[providerKey] ?? providerKey}
+            </DropdownMenuLabel>
+
+            {providerModels.map((model) => {
+              const isDisabled = !canUseJuristoModel(userPlan, model.id);
+              const isSelected = model.id === selectedModel.id;
+
+              return (
+                <Tooltip delayDuration={150} key={model.id}>
+                  <TooltipTrigger asChild>
+                    <div className={cn("w-full", isDisabled && "pointer-events-auto")}>
+                      <DropdownMenuItem
+                        className={cn(
+                          "flex items-center gap-2.5 text-xs font-medium rounded-none px-2.5 py-2 cursor-pointer transition-colors focus:outline-none",
+                          isSelected
+                            ? "bg-zinc-100 dark:bg-white/10 text-zinc-900 dark:text-white font-bold"
+                            : "text-zinc-600 dark:text-zinc-400 focus:bg-zinc-50 dark:focus:bg-white/5 focus:text-zinc-900 dark:focus:text-white",
+                          isDisabled && "opacity-40"
+                        )}
+                        onSelect={(e) => {
+                          if (isDisabled) {
+                            e.preventDefault();
+                            toast.error(getModelAccessError(userPlan, model.id));
+                            return;
+                          }
+                          onModelChange?.(model.id);
+                          setOpen(false);
+                        }}
                       >
-                        <span className="block truncate whitespace-nowrap">
-                          {(model as any).tooltip}
-                        </span>
-                      </TooltipContent>
-                    </Tooltip>
-                  );
-                })}
-              </ModelSelectorGroup>
-            )
-          )}
-        </ModelSelectorList>
-      </ModelSelectorContent>
-    </ModelSelector>
+                        {/* ─── RESTORED: PROVIDER BRAND LOGO IN LIST ITEMS ─── */}
+                        <ModelSelectorLogo provider={model.provider} className="size-3.5 shrink-0" />
+                        <span className="truncate flex-1 text-left">{model.name}</span>
+                        {isSelected && (
+                          <CheckIcon className="ml-auto size-3.5 shrink-0 text-[#4169E1]" />
+                        )}
+                      </DropdownMenuItem>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent
+                    align="start"
+                    className="z-[110] max-w-[240px] rounded-none border border-zinc-200 dark:border-white/10 bg-white dark:bg-[#0C1222] px-2.5 py-1.5 font-medium text-zinc-500 dark:text-zinc-400 text-[10px] leading-tight shadow-none"
+                    side="right"
+                    sideOffset={8}
+                  >
+                    <span>{(model as any).tooltip}</span>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
+          </div>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
+
 const ModelSelectorCompact = memo(PureModelSelectorCompact);
 
 function PureStopButton({

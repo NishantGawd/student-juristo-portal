@@ -5,7 +5,7 @@ import { trackUserActivity } from "@/lib/activity/tracking";
 import { activateUserPlan, getFallbackPeriodEnd } from "@/lib/billing/plan-cycle";
 import { updateContractPurchaseStatus, getContractPurchaseById } from "@/lib/db/queries";
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db/queries";
+import { db } from "@/lib/db";
 import { sql } from "drizzle-orm";
 import { NotificationService } from "@/lib/notifications/service";
 
